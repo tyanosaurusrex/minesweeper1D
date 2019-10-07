@@ -1,6 +1,7 @@
 var boardLength = document.querySelector('.boardLength');
 var numberOfBombs = document.querySelector('.numberOfBombs');
 var saveBtn = document.querySelector('.saveBtn');
+var showCheat = document.querySelector('.cheatBtn');
 var cheatingBoard = document.querySelector('.cheatingBoard');
 cheatingBoard.style.whiteSpace = 'pre';
 var playingBoard = document.querySelector('.playingBoard');
@@ -23,6 +24,7 @@ function init() {
   boardLength.disabled = false;
   numberOfBombs.disabled = false;
   saveBtn.disabled = false;
+  showCheat.textContent = "Show Cheat"
 
   boardLength.value = '';
   boardLength.focus();
@@ -54,7 +56,6 @@ function checkAndBuildBoard() {
       } else {
         boards = createNewBoard();
         placingBombs();
-        cheatingBoard.textContent = printBoard(boards);
 
         for (var i = 1; i <= length; i++) {
           boardToPlay[i] = '';
@@ -124,6 +125,17 @@ function printBoard(boards) {
 }
 
 saveBtn.addEventListener('click', checkAndBuildBoard)
+showCheat.addEventListener('click', showCheatBoard)
+
+function showCheatBoard() {
+  if (cheatingBoard.textContent != "") {
+    cheatingBoard.textContent = ""
+    showCheat.textContent = "Show Cheat"
+  } else {
+    cheatingBoard.textContent = printBoard(boards);
+    showCheat.textContent = "Hide Cheat"
+  }
+}
 
 function openTile() {
   var indexNumber = Number(indexToOpen.value);
